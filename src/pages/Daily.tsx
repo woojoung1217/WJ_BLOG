@@ -16,7 +16,7 @@ const Daily = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("https://server-gz9spsi96-woojoung1217s-projects.vercel.app/daily");
+        const response = await fetch("http://localhost:3000/daily");
         if (!response.ok) {
           throw new Error("데이터를 가져오는데 실패했습니다.");
         }

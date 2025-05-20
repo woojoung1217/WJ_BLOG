@@ -9,7 +9,9 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+// CORS 설정
 app.use(cors());
+
 app.use(express.json());
 
 // 타입 정의
@@ -44,7 +46,7 @@ const writeData = (data: DailyData): void => {
 
 // 기본 라우트
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to the API" });
+  res.json({ message: "Welcome to the WJBLOG" });
 });
 
 // 모든 일상 조회
