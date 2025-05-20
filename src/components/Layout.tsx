@@ -1,10 +1,31 @@
 import { Outlet, Link as RouterLink } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Container, Box, Button, ThemeProvider, createTheme } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+  Box,
+  Button,
+  ThemeProvider,
+  createTheme,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import ArticleIcon from "@mui/icons-material/Article";
 import CodeIcon from "@mui/icons-material/Code";
+import EmailIcon from "@mui/icons-material/Email";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useState } from "react";
 
-const theme = createTheme({
+const muiTheme = createTheme({
   palette: {
     primary: {
       main: "#000",
@@ -55,31 +76,102 @@ const theme = createTheme({
 });
 
 const Layout = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const menuItems = [
+    { text: "홈", icon: <HomeIcon />, path: "/" },
+    { text: "일상", icon: <ArticleIcon />, path: "/daily" },
+    { text: "개발", icon: <CodeIcon />, path: "/dev" },
+  ];
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <List>
+        {menuItems.map((item) => (
+          <ListItem
+            key={item.text}
+            component={RouterLink}
+            to={item.path}
+            sx={{
+              color: "inherit",
+              "&:hover": {
+                backgroundColor: "rgba(0, 0, 0, 0.04)",
+              },
+            }}
+          >
+            <ListItemIcon sx={{ color: "inherit" }}>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={muiTheme}>
       <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <AppBar position="static" sx={{ width: "100%", left: 0, right: 0 }}>
           <Container maxWidth="xl">
             <Toolbar disableGutters>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                WJBLOG
+              <img src="/src/assets/images/logo.svg" alt="logo" width={20} height={20} style={{ marginRight: "10px" }} />
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  flexGrow: 1,
+                  fontSize: { xs: "1rem", sm: "1.25rem" },
+                }}
+              >
+                WooJoung.DEV
               </Typography>
-              <Box sx={{ display: "flex", gap: 2 }}>
-                <Button color="inherit" component={RouterLink} to="/" startIcon={<HomeIcon />}>
-                  홈
-                </Button>
-                <Button color="inherit" component={RouterLink} to="/daily" startIcon={<ArticleIcon />}>
-                  일상
-                </Button>
-                <Button color="inherit" component={RouterLink} to="/dev" startIcon={<CodeIcon />}>
-                  개발
-                </Button>
-              </Box>
+              {isMobile ? (
+                <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle}>
+                  <MenuIcon />
+                </IconButton>
+              ) : (
+                <Box sx={{ display: "flex", gap: 2 }}>
+                  {menuItems.map((item) => (
+                    <Button key={item.text} color="inherit" component={RouterLink} to={item.path} startIcon={item.icon}>
+                      {item.text}
+                    </Button>
+                  ))}
+                </Box>
+              )}
             </Toolbar>
           </Container>
         </AppBar>
 
-        <Container component="main" sx={{ mt: 4, mb: 4, flex: 1 }}>
+        <Drawer
+          variant="temporary"
+          anchor="right"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": { boxSizing: "border-box", width: 240 },
+          }}
+        >
+          {drawer}
+        </Drawer>
+
+        <Container
+          component="main"
+          sx={{
+            mt: 4,
+            mb: 4,
+            flex: 1,
+            px: { xs: 2, sm: 3 },
+          }}
+        >
           <Outlet />
         </Container>
 
@@ -93,11 +185,35 @@ const Layout = () => {
           }}
         >
           <Container maxWidth="sm">
-            <Typography variant="body2" color="text.secondary" align="center">
-              {"© "}
-              {new Date().getFullYear()}
-              {" 내 블로그. All rights reserved."}
-            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 2,
+                px: { xs: 1, sm: 2 },
+              }}
+            >
+              <Box sx={{ display: "flex", gap: 2 }}>
+                <IconButton href="mailto:your.email@example.com" color="primary" aria-label="email" size={isMobile ? "small" : "medium"}>
+                  <EmailIcon />
+                </IconButton>
+                <IconButton
+                  href="https://github.com/yourusername"
+                  target="_blank"
+                  color="primary"
+                  aria-label="github"
+                  size={isMobile ? "small" : "medium"}
+                >
+                  <GitHubIcon />
+                </IconButton>
+              </Box>
+              <Typography variant="body2" color="text.secondary" align="center" sx={{ fontSize: { xs: "0.75rem", sm: "0.875rem" } }}>
+                {"© "}
+                {new Date().getFullYear()}
+                {" WooJoung.DEV. All rights reserved."}
+              </Typography>
+            </Box>
           </Container>
         </Box>
       </Box>
