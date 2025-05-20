@@ -24,6 +24,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
+import logo from "../assets/images/logo.svg";
 
 const muiTheme = createTheme({
   palette: {
@@ -119,7 +120,7 @@ const Layout = () => {
         <AppBar position="static" sx={{ width: "100%", left: 0, right: 0 }}>
           <Container maxWidth="xl">
             <Toolbar disableGutters>
-              <img src="/src/assets/images/logo.svg" alt="logo" width={20} height={20} style={{ marginRight: "10px" }} />
+              <img src={logo} alt="logo" width={20} height={20} style={{ marginRight: "10px" }} />
               <Typography
                 variant="h6"
                 component="div"
