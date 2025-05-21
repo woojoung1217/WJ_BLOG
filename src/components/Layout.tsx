@@ -200,7 +200,7 @@ const Layout = () => {
                   <EmailIcon />
                 </IconButton>
                 <IconButton
-                  href="https://github.com/yourusername"
+                  href="https://github.com/woojoung1217"
                   target="_blank"
                   color="primary"
                   aria-label="github"
