@@ -25,6 +25,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import logo from "../assets/images/logo.svg";
+import { TypeAnimation } from "react-type-animation";
 
 const muiTheme = createTheme({
   palette: {
@@ -129,7 +130,12 @@ const Layout = () => {
                   fontSize: { xs: "1rem", sm: "1.25rem" },
                 }}
               >
-                WooJoung.DEV
+                <TypeAnimation
+                  sequence={["WooJoung.DEV", 4000, "개발자 우중입니다.", 1000, "WooJoung.DEV"]}
+                  wrapper="span"
+                  speed={50}
+                  repeat={Infinity}
+                />
               </Typography>
               {isMobile ? (
                 <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle}>
@@ -154,7 +160,7 @@ const Layout = () => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
