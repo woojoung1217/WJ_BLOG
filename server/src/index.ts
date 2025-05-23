@@ -98,6 +98,28 @@ app.get("/posts", (req, res) => {
   res.json(allPosts);
 });
 
+// 특정 포스트 조회
+app.get("/posts/:id", (req, res) => {
+  const { id } = req.params;
+  const dailyData = readData(dailyDataPath);
+  const devData = readData(devDataPath);
+
+  // 일상 포스트에서 검색
+  const dailyPost = dailyData.posts.find((post) => post.id === id);
+  if (dailyPost) {
+    return res.json({ ...dailyPost, type: "daily" as const });
+  }
+
+  // 개발 포스트에서 검색
+  const devPost = devData.posts.find((post) => post.id === id);
+  if (devPost) {
+    return res.json({ ...devPost, type: "dev" as const });
+  }
+
+  // 포스트를 찾지 못한 경우
+  res.status(404).json({ message: "포스트를 찾을 수 없습니다." });
+});
+
 // 새로운 일상 생성
 app.post("/daily", upload.single("image"), (req, res) => {
   const { title, content, date } = req.body;

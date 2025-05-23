@@ -1,4 +1,4 @@
-import { Outlet, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -24,6 +24,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
+import type { ReactNode } from "react";
 import logo from "../assets/images/logo.svg";
 import { TypeAnimation } from "react-type-animation";
 
@@ -77,7 +78,11 @@ const muiTheme = createTheme({
   },
 });
 
-const Layout = () => {
+interface LayoutProps {
+  children: ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -179,7 +184,7 @@ const Layout = () => {
             px: { xs: 2, sm: 3 },
           }}
         >
-          <Outlet />
+          {children}
         </Container>
 
         <Box

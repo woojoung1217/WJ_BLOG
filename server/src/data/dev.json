@@ -1,10 +1,18 @@
 {
   "posts": [
     {
-      "id": "2",
-      "title": "Next.js 14 새로운 기능",
-      "date": "2024-03-19",
-      "content": "Next.js 14에서 추가된 새로운 기능들을 살펴봅니다..."
+      "id": "3",
+      "title": "React와 TypeScript로 블로그 만들기 - 1부: 프로젝트 설정",
+      "date": "2025-05-20",
+      "type": "dev",
+      "content": "안녕하세요! 오늘부터 React와 TypeScript를 사용해서 개인 블로그를 만드는 과정을 공유하려고 합니다.\n\n먼저 프로젝트를 시작하기 전에 필요한 도구들을 설치했습니다.\n\n프로젝트 구조는 다음과 같이 설정했습니다:\n```\nblog/\n  ├── src/\n  │   ├── components/\n  │   ├── pages/\n  │   ├── hooks/\n  │   └── types/\n  ├── public/\n  └── package.json\n```\n\n주요 사용 기술 스택은 다음과 같습니다:\n- React 18\n- TypeScript\n- Material-UI\n- React Router\n\n프로젝트를 시작하면서 가장 중요하게 생각한 점은 타입 안정성이었습니다. TypeScript를 사용함으로써 개발 시 발생할 수 있는 많은 오류를 미리 방지할 수 있었습니다.\n\n다음 포스트에서는 실제 컴포넌트 구현과 라우팅 설정에 대해 다루도록 하겠습니다. 기대해주세요!"
+    },
+    {
+      "id": "4",
+      "title": "Next.js 14의 새로운 기능 살펴보기",
+      "date": "2025-04-18",
+      "type": "dev",
+      "content": "안녕하세요! 오늘은 Next.js 14의 새로운 기능들을 살펴보려고 합니다.\n\nNext.js 14는 정말 많은 개선사항을 포함하고 있는데, 그 중에서도 가장 주목할 만한 기능은 Server Actions입니다.\n\nServer Actions를 사용하면 클라이언트 컴포넌트에서 직접 서버 함수를 호출할 수 있습니다. 이는 API 라우트를 만들 필요 없이 서버 사이드 로직을 구현할 수 있게 해줍니다.\n\n```typescript\n'use server'\n\nasync function submitForm(formData: FormData) {\n  const name = formData.get('name')\n  await db.users.create({ name })\n}\n```\n\n또한 Partial Prerendering이라는 새로운 기능도 추가되었습니다. 이는 페이지의 일부를 정적으로 생성하고 나머지는 동적으로 렌더링할 수 있게 해줍니다.\n\n이러한 새로운 기능들은 웹 애플리케이션의 성능과 개발 경험을 크게 향상시킬 것으로 기대됩니다. 다음 포스트에서는 이러한 기능들을 실제 프로젝트에 적용하는 방법을 다루도록 하겠습니다."
     }
   ]
 }

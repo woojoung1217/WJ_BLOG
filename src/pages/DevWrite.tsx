@@ -29,7 +29,7 @@ const DevWrite = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/dev", {
+      const response = await fetch("https://server-coral-two.vercel.app/dev", {
         method: "POST",
         body: formData,
       });
