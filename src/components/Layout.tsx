@@ -133,8 +133,8 @@ const Layout = () => {
                 <TypeAnimation
                   sequence={["WooJoung.DEV", 4000, "개발자 우중입니다.", 1000, "WooJoung.DEV"]}
                   wrapper="span"
-                  speed={50}
-                  repeat={Infinity}
+                  speed={20}
+                  repeat={2}
                 />
               </Typography>
               {isMobile ? (
