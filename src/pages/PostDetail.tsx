@@ -30,7 +30,7 @@ const PostDetail = () => {
         const data = await response.json();
         setPost(data);
 
-        // 이미지 존재 여부 확인
+        // 이미지 존재 여부 확인1
         if (data.images) {
           const validImages = await Promise.all(
             data.images.map(async (image: string) => {
