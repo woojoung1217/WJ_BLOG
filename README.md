@@ -104,6 +104,7 @@ npm run dev
 
 - JWT 기반 로그인
 - GitHub OAuth 연동
+- CRUD 게시글
 
 ### 2. 파일 업로드
 
